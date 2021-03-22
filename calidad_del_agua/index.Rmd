@@ -1,15 +1,22 @@
 --- 
 title: "TRABAJO DE CALIDAD DE AGUA RIMAC"
-author: "Luis Edgar Gutierrez Saldaña" 
+author: "Luis Edgar Gutierrez Saldaña"
 date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
+output:
+  word_document: default
+  pdf_document: default
 documentclass: book
-bibliography: [book.bib, packages.bib]
+bibliography:
+- book.bib
+- packages.bib
 biblio-style: apalike
 link-citations: yes
-description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+description: This is a minimal example of using the bookdown package to write a book.
+  The output format for this example is bookdown::gitbook.
+site: bookdown::bookdown_site
 ---
 # TESIS DE CALIDAD DE AGUA DEL RIO DE RIMAC DEL AÑO 2009-2015
+
 
 ```{r}
 library(readxl)
