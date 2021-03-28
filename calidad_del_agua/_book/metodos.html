@@ -21,8 +21,10 @@
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
 
+<meta name="author" content="Yihui Xie" />
 
 
+<meta name="date" content="2021-03-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -132,6 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>1.DATOS</a></li>
 <li class="chapter" data-level="" data-path="introduccion.html"><a href="introduccion.html"><i class="fa fa-check"></i>1.INTRODUCCION</a></li>
 <li class="chapter" data-level="" data-path="objetivos.html"><a href="objetivos.html"><i class="fa fa-check"></i>2.OBJETIVOS</a></li>
 <li class="chapter" data-level="" data-path="metodos.html"><a href="metodos.html"><i class="fa fa-check"></i>3.METODOS</a></li>
@@ -432,7 +435,7 @@ Distanicia euclidiana y metodo de enlace Ward.D2</p>
 ##  $ grp : Factor w/ 3 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;: 1 2 2 2 1 3 3 3 3 1 ...</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="metodos.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Si deseamos exportar :</span></span>
 <span id="cb35-2"><a href="metodos.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv(datos.j,&quot;Compras con Jerarquico Aglomerativo.csv&quot;)</span></span></code></pre></div>
-<p><strong>Análisis de Componentes Principales con el paquete ade4</strong></p>
+<p><strong>3.2Análisis de Componentes Principales con el paquete ade4</strong></p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="metodos.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#CORROBORANDO</span></span>
 <span id="cb36-2"><a href="metodos.html#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-3"><a href="metodos.html#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -557,7 +560,7 @@ Distanicia euclidiana y metodo de enlace Ward.D2</p>
 <span id="cb44-38"><a href="metodos.html#cb44-38" aria-hidden="true" tabindex="-1"></a><span class="co">#pH</span></span></code></pre></div>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="metodos.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Segunda forma</span></span>
 <span id="cb45-2"><a href="metodos.html#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="metodos.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co">#podemos observar que todos los elementos estan asociados mas a la  </span></span>
+<span id="cb45-3"><a href="metodos.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co">#podemos observar que todos las variables  estan asociados mas a la  </span></span>
 <span id="cb45-4"><a href="metodos.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co">#dimension 1,excepto &quot;pH&quot; y &quot;OD&quot; que no se sabe con exactitud si pertenece</span></span>
 <span id="cb45-5"><a href="metodos.html#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co">#a la dimension 1 o a la dimension2 de manera visual, pero con nuestra matriz de</span></span>
 <span id="cb45-6"><a href="metodos.html#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co">#correlacion ya determinamos la variable &quot;pH&quot; pertenece al componente3 </span></span>
@@ -574,17 +577,18 @@ Distanicia euclidiana y metodo de enlace Ward.D2</p>
 <span id="cb46-5"><a href="metodos.html#cb46-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.var =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
 <span id="cb46-6"><a href="metodos.html#cb46-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.ind =</span> <span class="st">&quot;black&quot;</span> )</span></code></pre></div>
 <p><img src="calidad_del_agua_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="metodos.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafica de Valores propios - ScreePlot</span></span>
-<span id="cb47-2"><a href="metodos.html#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="metodos.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co">#El primer componente retiene 74% de la inercia total</span></span>
-<span id="cb47-4"><a href="metodos.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co">#El segundo componete retiene 9.8% de la inercia total</span></span>
-<span id="cb47-5"><a href="metodos.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co">#El tercer componente retiene 5.7% de la inercia total</span></span>
-<span id="cb47-6"><a href="metodos.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(acp, <span class="at">addlabels=</span><span class="cn">TRUE</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>,</span>
-<span id="cb47-7"><a href="metodos.html#cb47-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">barfill=</span><span class="st">&quot;white&quot;</span>, <span class="at">barcolor =</span><span class="st">&quot;darkblue&quot;</span>,</span>
-<span id="cb47-8"><a href="metodos.html#cb47-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">linecolor =</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">80</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="metodos.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="do">###indicadores</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="metodos.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafica de Valores propios - ScreePlot</span></span>
+<span id="cb48-2"><a href="metodos.html#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="metodos.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#El primer componente retiene 74% de la inercia total</span></span>
+<span id="cb48-4"><a href="metodos.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co">#El segundo componete retiene 9.8% de la inercia total</span></span>
+<span id="cb48-5"><a href="metodos.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co">#El tercer componente retiene 5.7% de la inercia total</span></span>
+<span id="cb48-6"><a href="metodos.html#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(acp, <span class="at">addlabels=</span><span class="cn">TRUE</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>,</span>
+<span id="cb48-7"><a href="metodos.html#cb48-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">barfill=</span><span class="st">&quot;white&quot;</span>, <span class="at">barcolor =</span><span class="st">&quot;darkblue&quot;</span>,</span>
+<span id="cb48-8"><a href="metodos.html#cb48-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">linecolor =</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">80</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>() </span></code></pre></div>
 <p><img src="calidad_del_agua_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="metodos.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scores o Puntuaciones de cada individuo</span></span>
-<span id="cb48-2"><a href="metodos.html#cb48-2" aria-hidden="true" tabindex="-1"></a>acp<span class="sc">$</span>li[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="metodos.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scores o Puntuaciones de cada individuo</span></span>
+<span id="cb49-2"><a href="metodos.html#cb49-2" aria-hidden="true" tabindex="-1"></a>acp<span class="sc">$</span>li[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,]</span></code></pre></div>
 <pre><code>##         Axis1      Axis2      Axis3
 ## Ene -1.127415  1.2241429 -0.4215330
 ## Feb -7.321424 -1.5374149 -1.7252348
@@ -596,8 +600,8 @@ Distanicia euclidiana y metodo de enlace Ward.D2</p>
 ## Ago  3.572872 -1.2874593  1.1904835
 ## Set  2.750543 -0.5237799  1.5165983
 ## Oct  2.683794  1.3317449 -0.4582014</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="metodos.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfica de individuos sobre el primer plano de componentes</span></span>
-<span id="cb50-2"><a href="metodos.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">s.label</span>(acp<span class="sc">$</span>li,<span class="at">clabel=</span><span class="fl">0.7</span>,<span class="at">grid=</span><span class="cn">FALSE</span>,<span class="at">boxes=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="metodos.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfica de individuos sobre el primer plano de componentes</span></span>
+<span id="cb51-2"><a href="metodos.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">s.label</span>(acp<span class="sc">$</span>li,<span class="at">clabel=</span><span class="fl">0.7</span>,<span class="at">grid=</span><span class="cn">FALSE</span>,<span class="at">boxes=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="calidad_del_agua_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 
 </div>
