@@ -1,0 +1,24 @@
+show warnings 
+show messages
+use paged tables
+use custom figure size
+
+
+output
+
+show output only
+show code and output
+show nothing(run code)
+show nothing(don't run code)
+
+mostrar advertencias
+mostrar mensajes
+usar tablas paginadas
+usar tamaño de figura personalizado
+
+producción
+
+mostrar solo la salida
+mostrar código y salida
+no mostrar nada (ejecutar código)
+no mostrar nada (no ejecutar código)

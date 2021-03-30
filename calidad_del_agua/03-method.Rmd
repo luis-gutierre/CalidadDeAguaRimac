@@ -203,14 +203,12 @@ fviz_cluster(list(data = datosc, cluster = grp),
 ```{r}
 # Juntando el archivo de "datos" con la columna de "cluster"
 datos.j <- cbind(datosc,grp)
-str(datos.j)
  
 ```
 
 ```{r}
 #convirtiendo en factor la varaible "grp" 
 datos.j$grp <- factor(datos.j$grp)
-str(datos.j)
 
 #Si deseamos exportar :
 # write.csv(datos.j,"Compras con Jerarquico Aglomerativo.csv")

@@ -376,73 +376,20 @@ Distanicia euclidiana y metodo de enlace Ward.D2</p>
 <span id="cb30-7"><a href="metodos.html#cb30-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.clust.cent =</span> <span class="cn">FALSE</span>, <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>())</span></code></pre></div>
 <p><img src="calidad_del_agua_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="metodos.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Juntando el archivo de &quot;datos&quot; con la columna de &quot;cluster&quot;</span></span>
-<span id="cb31-2"><a href="metodos.html#cb31-2" aria-hidden="true" tabindex="-1"></a>datos.j <span class="ot">&lt;-</span> <span class="fu">cbind</span>(datosc,grp)</span>
-<span id="cb31-3"><a href="metodos.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(datos.j)</span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    12 obs. of  25 variables:
-##  $ Caud: num  0.372 1.32 2.299 0.803 -0.508 ...
-##  $ Temp: num  0.621 1.275 1.275 1.21 0.163 ...
-##  $ pH  : num  0.37 0.581 -1.11 -1.11 1.004 ...
-##  $ Turb: num  -0.279 1.717 2.421 0.138 -0.551 ...
-##  $ CE  : num  -0.652 -1.227 -1.686 -1.391 0.642 ...
-##  $ OD  : num  -0.0477 0.8426 1.4785 -1.2559 -1.0015 ...
-##  $ SD  : num  -0.6264 -1.1037 -1.5813 -1.4788 0.0404 ...
-##  $ Akal: num  -0.734 -1.089 -1.812 -1.065 1.174 ...
-##  $ DI  : num  -0.506 -1.09 -1.732 -1.434 0.631 ...
-##  $ Cls : num  -0.732 -1.111 -1.111 -1.339 1.162 ...
-##  $ so  : num  -0.158 -1.197 -2.091 -1.287 0.223 ...
-##  $ N03 : num  -0.507 -0.942 -1.464 -1.747 0.362 ...
-##  $ N02 : num  0.0753 -0.9789 -1.7319 -1.4307 0.2259 ...
-##  $ PO  : num  -0.644 -1.289 -1.825 -0.859 -0.322 ...
-##  $ Cu  : num  0.28 1.659 2.32 0.17 -0.271 ...
-##  $ Al  : num  -0.175 1.453 2.543 0.398 -0.559 ...
-##  $ Fe  : num  -0.102 1.43 2.498 0.547 -0.594 ...
-##  $ Mu  : num  -0.0809 1.9183 2.093 0.4529 -0.1488 ...
-##  $ Pb  : num  -0.246 1.943 1.866 0.982 -0.592 ...
-##  $ Cd  : num  -0.15 2.542 0.748 -0.15 0.748 ...
-##  $ Zn  : num  0.1606 1.7057 1.8997 -0.0269 0.7812 ...
-##  $ As  : num  -0.35 2.418 1.334 0.934 -0.492 ...
-##  $ Colo: num  0.1935 2.1774 1.047 0.0881 -0.3373 ...
-##  $ Cole: num  0.5239 1.6922 1.4137 -0.3787 -0.0613 ...
-##  $ grp : int  1 2 2 2 1 3 3 3 3 1 ...</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="metodos.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#convirtiendo en factor la varaible &quot;grp&quot; </span></span>
-<span id="cb33-2"><a href="metodos.html#cb33-2" aria-hidden="true" tabindex="-1"></a>datos.j<span class="sc">$</span>grp <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos.j<span class="sc">$</span>grp)</span>
-<span id="cb33-3"><a href="metodos.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(datos.j)</span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    12 obs. of  25 variables:
-##  $ Caud: num  0.372 1.32 2.299 0.803 -0.508 ...
-##  $ Temp: num  0.621 1.275 1.275 1.21 0.163 ...
-##  $ pH  : num  0.37 0.581 -1.11 -1.11 1.004 ...
-##  $ Turb: num  -0.279 1.717 2.421 0.138 -0.551 ...
-##  $ CE  : num  -0.652 -1.227 -1.686 -1.391 0.642 ...
-##  $ OD  : num  -0.0477 0.8426 1.4785 -1.2559 -1.0015 ...
-##  $ SD  : num  -0.6264 -1.1037 -1.5813 -1.4788 0.0404 ...
-##  $ Akal: num  -0.734 -1.089 -1.812 -1.065 1.174 ...
-##  $ DI  : num  -0.506 -1.09 -1.732 -1.434 0.631 ...
-##  $ Cls : num  -0.732 -1.111 -1.111 -1.339 1.162 ...
-##  $ so  : num  -0.158 -1.197 -2.091 -1.287 0.223 ...
-##  $ N03 : num  -0.507 -0.942 -1.464 -1.747 0.362 ...
-##  $ N02 : num  0.0753 -0.9789 -1.7319 -1.4307 0.2259 ...
-##  $ PO  : num  -0.644 -1.289 -1.825 -0.859 -0.322 ...
-##  $ Cu  : num  0.28 1.659 2.32 0.17 -0.271 ...
-##  $ Al  : num  -0.175 1.453 2.543 0.398 -0.559 ...
-##  $ Fe  : num  -0.102 1.43 2.498 0.547 -0.594 ...
-##  $ Mu  : num  -0.0809 1.9183 2.093 0.4529 -0.1488 ...
-##  $ Pb  : num  -0.246 1.943 1.866 0.982 -0.592 ...
-##  $ Cd  : num  -0.15 2.542 0.748 -0.15 0.748 ...
-##  $ Zn  : num  0.1606 1.7057 1.8997 -0.0269 0.7812 ...
-##  $ As  : num  -0.35 2.418 1.334 0.934 -0.492 ...
-##  $ Colo: num  0.1935 2.1774 1.047 0.0881 -0.3373 ...
-##  $ Cole: num  0.5239 1.6922 1.4137 -0.3787 -0.0613 ...
-##  $ grp : Factor w/ 3 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;: 1 2 2 2 1 3 3 3 3 1 ...</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="metodos.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Si deseamos exportar :</span></span>
-<span id="cb35-2"><a href="metodos.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv(datos.j,&quot;Compras con Jerarquico Aglomerativo.csv&quot;)</span></span></code></pre></div>
+<span id="cb31-2"><a href="metodos.html#cb31-2" aria-hidden="true" tabindex="-1"></a>datos.j <span class="ot">&lt;-</span> <span class="fu">cbind</span>(datosc,grp)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="metodos.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#convirtiendo en factor la varaible &quot;grp&quot; </span></span>
+<span id="cb32-2"><a href="metodos.html#cb32-2" aria-hidden="true" tabindex="-1"></a>datos.j<span class="sc">$</span>grp <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos.j<span class="sc">$</span>grp)</span>
+<span id="cb32-3"><a href="metodos.html#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="metodos.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Si deseamos exportar :</span></span>
+<span id="cb32-5"><a href="metodos.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv(datos.j,&quot;Compras con Jerarquico Aglomerativo.csv&quot;)</span></span></code></pre></div>
 <p><strong>3.2Análisis de Componentes Principales con el paquete ade4</strong></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="metodos.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#CORROBORANDO</span></span>
-<span id="cb36-2"><a href="metodos.html#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="metodos.html#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="metodos.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ade4)</span>
-<span id="cb36-5"><a href="metodos.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Usando 3 componentes </span></span>
-<span id="cb36-6"><a href="metodos.html#cb36-6" aria-hidden="true" tabindex="-1"></a>acp <span class="ot">&lt;-</span> <span class="fu">dudi.pca</span>(datosc,<span class="at">scannf=</span><span class="cn">FALSE</span>,<span class="at">nf=</span><span class="dv">3</span>)</span>
-<span id="cb36-7"><a href="metodos.html#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(acp) </span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="metodos.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#CORROBORANDO</span></span>
+<span id="cb33-2"><a href="metodos.html#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="metodos.html#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="metodos.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ade4)</span>
+<span id="cb33-5"><a href="metodos.html#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Usando 3 componentes </span></span>
+<span id="cb33-6"><a href="metodos.html#cb33-6" aria-hidden="true" tabindex="-1"></a>acp <span class="ot">&lt;-</span> <span class="fu">dudi.pca</span>(datosc,<span class="at">scannf=</span><span class="cn">FALSE</span>,<span class="at">nf=</span><span class="dv">3</span>)</span>
+<span id="cb33-7"><a href="metodos.html#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(acp) </span></code></pre></div>
 <pre><code>## Class: pca dudi
 ## Call: dudi.pca(df = datosc, scannf = FALSE, nf = 3)
 ## 
@@ -461,19 +408,19 @@ Distanicia euclidiana y metodo de enlace Ward.D2</p>
 ##   73.98   83.79   89.49   93.32   95.73 
 ## 
 ## (Only 5 dimensions (out of 11) are shown)</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="metodos.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores propios</span></span>
-<span id="cb38-2"><a href="metodos.html#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="metodos.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#el criterio de la media:</span></span>
-<span id="cb38-4"><a href="metodos.html#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-5"><a href="metodos.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">#estamos trabajando con la matriz correlacion cada variable deberia retener  </span></span>
-<span id="cb38-6"><a href="metodos.html#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#1% de la inercia total , nos quedamos con los 3 primeros autovalores</span></span>
-<span id="cb38-7"><a href="metodos.html#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">#que son mayores a 1.</span></span>
-<span id="cb38-8"><a href="metodos.html#cb38-8" aria-hidden="true" tabindex="-1"></a>acp<span class="sc">$</span>eig </span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="metodos.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores propios</span></span>
+<span id="cb35-2"><a href="metodos.html#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="metodos.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#el criterio de la media:</span></span>
+<span id="cb35-4"><a href="metodos.html#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="metodos.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#estamos trabajando con la matriz correlacion cada variable deberia retener  </span></span>
+<span id="cb35-6"><a href="metodos.html#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co">#1% de la inercia total , nos quedamos con los 3 primeros autovalores</span></span>
+<span id="cb35-7"><a href="metodos.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co">#que son mayores a 1.</span></span>
+<span id="cb35-8"><a href="metodos.html#cb35-8" aria-hidden="true" tabindex="-1"></a>acp<span class="sc">$</span>eig </span></code></pre></div>
 <pre><code>##  [1] 17.75412281  2.35476144  1.36828719  0.91885927  0.58004727  0.40691705
 ##  [7]  0.24251967  0.16344726  0.11008407  0.06970343  0.03125052</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="metodos.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># con 3 componetes podemos explicar las demas variables </span></span>
-<span id="cb40-2"><a href="metodos.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#reteniendo 89.49% de la inercia total</span></span>
-<span id="cb40-3"><a href="metodos.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">inertia.dudi</span>(acp)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="metodos.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># con 3 componetes podemos explicar las demas variables </span></span>
+<span id="cb37-2"><a href="metodos.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co">#reteniendo 89.49% de la inercia total</span></span>
+<span id="cb37-3"><a href="metodos.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">inertia.dudi</span>(acp)</span></code></pre></div>
 <pre><code>## Inertia information:
 ## Call: inertia.dudi(x = acp)
 ## 
@@ -490,11 +437,11 @@ Distanicia euclidiana y metodo de enlace Ward.D2</p>
 ## Ax9   0.11008   23.90   99.58
 ## Ax10  0.06970   23.97   99.87
 ## Ax11  0.03125   24.00  100.00</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="metodos.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlaciones entre las variables y los componentes</span></span>
-<span id="cb42-2"><a href="metodos.html#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="metodos.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="metodos.html#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="metodos.html#cb42-5" aria-hidden="true" tabindex="-1"></a>acp<span class="sc">$</span>co[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)] </span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="metodos.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlaciones entre las variables y los componentes</span></span>
+<span id="cb39-2"><a href="metodos.html#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="metodos.html#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="metodos.html#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="metodos.html#cb39-5" aria-hidden="true" tabindex="-1"></a>acp<span class="sc">$</span>co[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)] </span></code></pre></div>
 <pre><code>##           Comp1       Comp2       Comp3
 ## Caud -0.9856905 -0.01901796  0.07578045
 ## Temp -0.8575730  0.34464942 -0.26784995
@@ -520,75 +467,75 @@ Distanicia euclidiana y metodo de enlace Ward.D2</p>
 ## As   -0.9213033 -0.15271183 -0.06553008
 ## Colo -0.8002671  0.02046972 -0.42279859
 ## Cole -0.7701392 -0.05606211 -0.45376503</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="metodos.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
-<span id="cb44-2"><a href="metodos.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co">#componente1:#</span></span>
-<span id="cb44-3"><a href="metodos.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
-<span id="cb44-4"><a href="metodos.html#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-5"><a href="metodos.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co">#caudal</span></span>
-<span id="cb44-6"><a href="metodos.html#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co">#temp</span></span>
-<span id="cb44-7"><a href="metodos.html#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Turb</span></span>
-<span id="cb44-8"><a href="metodos.html#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co">#CE</span></span>
-<span id="cb44-9"><a href="metodos.html#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SD</span></span>
-<span id="cb44-10"><a href="metodos.html#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Akal</span></span>
-<span id="cb44-11"><a href="metodos.html#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Di</span></span>
-<span id="cb44-12"><a href="metodos.html#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Cls</span></span>
-<span id="cb44-13"><a href="metodos.html#cb44-13" aria-hidden="true" tabindex="-1"></a><span class="co">#so</span></span>
-<span id="cb44-14"><a href="metodos.html#cb44-14" aria-hidden="true" tabindex="-1"></a><span class="co">#NO3</span></span>
-<span id="cb44-15"><a href="metodos.html#cb44-15" aria-hidden="true" tabindex="-1"></a><span class="co">#NO2</span></span>
-<span id="cb44-16"><a href="metodos.html#cb44-16" aria-hidden="true" tabindex="-1"></a><span class="co">#PO</span></span>
-<span id="cb44-17"><a href="metodos.html#cb44-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Cu</span></span>
-<span id="cb44-18"><a href="metodos.html#cb44-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Al</span></span>
-<span id="cb44-19"><a href="metodos.html#cb44-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Fe</span></span>
-<span id="cb44-20"><a href="metodos.html#cb44-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Mu</span></span>
-<span id="cb44-21"><a href="metodos.html#cb44-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Pb</span></span>
-<span id="cb44-22"><a href="metodos.html#cb44-22" aria-hidden="true" tabindex="-1"></a><span class="co">#Cd</span></span>
-<span id="cb44-23"><a href="metodos.html#cb44-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Zn</span></span>
-<span id="cb44-24"><a href="metodos.html#cb44-24" aria-hidden="true" tabindex="-1"></a><span class="co">#As</span></span>
-<span id="cb44-25"><a href="metodos.html#cb44-25" aria-hidden="true" tabindex="-1"></a><span class="co">#Colo</span></span>
-<span id="cb44-26"><a href="metodos.html#cb44-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Cole</span></span>
-<span id="cb44-27"><a href="metodos.html#cb44-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-28"><a href="metodos.html#cb44-28" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
-<span id="cb44-29"><a href="metodos.html#cb44-29" aria-hidden="true" tabindex="-1"></a><span class="co">#componente2:#</span></span>
-<span id="cb44-30"><a href="metodos.html#cb44-30" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
-<span id="cb44-31"><a href="metodos.html#cb44-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-32"><a href="metodos.html#cb44-32" aria-hidden="true" tabindex="-1"></a><span class="co">#OD</span></span>
-<span id="cb44-33"><a href="metodos.html#cb44-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-34"><a href="metodos.html#cb44-34" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
-<span id="cb44-35"><a href="metodos.html#cb44-35" aria-hidden="true" tabindex="-1"></a><span class="co">#componente3:#</span></span>
-<span id="cb44-36"><a href="metodos.html#cb44-36" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
-<span id="cb44-37"><a href="metodos.html#cb44-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-38"><a href="metodos.html#cb44-38" aria-hidden="true" tabindex="-1"></a><span class="co">#pH</span></span></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="metodos.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Segunda forma</span></span>
-<span id="cb45-2"><a href="metodos.html#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="metodos.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co">#podemos observar que todos las variables  estan asociados mas a la  </span></span>
-<span id="cb45-4"><a href="metodos.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co">#dimension 1,excepto &quot;pH&quot; y &quot;OD&quot; que no se sabe con exactitud si pertenece</span></span>
-<span id="cb45-5"><a href="metodos.html#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co">#a la dimension 1 o a la dimension2 de manera visual, pero con nuestra matriz de</span></span>
-<span id="cb45-6"><a href="metodos.html#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co">#correlacion ya determinamos la variable &quot;pH&quot; pertenece al componente3 </span></span>
-<span id="cb45-7"><a href="metodos.html#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co">#y la variable &quot;OD&quot; pertenece al componente2</span></span>
-<span id="cb45-8"><a href="metodos.html#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-9"><a href="metodos.html#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-10"><a href="metodos.html#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
-<span id="cb45-11"><a href="metodos.html#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(acp, <span class="at">col.var=</span><span class="st">&quot;steelblue&quot;</span>)<span class="sc">+</span><span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="metodos.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
+<span id="cb41-2"><a href="metodos.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co">#componente1:#</span></span>
+<span id="cb41-3"><a href="metodos.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
+<span id="cb41-4"><a href="metodos.html#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="metodos.html#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#caudal</span></span>
+<span id="cb41-6"><a href="metodos.html#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co">#temp</span></span>
+<span id="cb41-7"><a href="metodos.html#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Turb</span></span>
+<span id="cb41-8"><a href="metodos.html#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co">#CE</span></span>
+<span id="cb41-9"><a href="metodos.html#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SD</span></span>
+<span id="cb41-10"><a href="metodos.html#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Akal</span></span>
+<span id="cb41-11"><a href="metodos.html#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Di</span></span>
+<span id="cb41-12"><a href="metodos.html#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Cls</span></span>
+<span id="cb41-13"><a href="metodos.html#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="co">#so</span></span>
+<span id="cb41-14"><a href="metodos.html#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="co">#NO3</span></span>
+<span id="cb41-15"><a href="metodos.html#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="co">#NO2</span></span>
+<span id="cb41-16"><a href="metodos.html#cb41-16" aria-hidden="true" tabindex="-1"></a><span class="co">#PO</span></span>
+<span id="cb41-17"><a href="metodos.html#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Cu</span></span>
+<span id="cb41-18"><a href="metodos.html#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Al</span></span>
+<span id="cb41-19"><a href="metodos.html#cb41-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Fe</span></span>
+<span id="cb41-20"><a href="metodos.html#cb41-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Mu</span></span>
+<span id="cb41-21"><a href="metodos.html#cb41-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Pb</span></span>
+<span id="cb41-22"><a href="metodos.html#cb41-22" aria-hidden="true" tabindex="-1"></a><span class="co">#Cd</span></span>
+<span id="cb41-23"><a href="metodos.html#cb41-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Zn</span></span>
+<span id="cb41-24"><a href="metodos.html#cb41-24" aria-hidden="true" tabindex="-1"></a><span class="co">#As</span></span>
+<span id="cb41-25"><a href="metodos.html#cb41-25" aria-hidden="true" tabindex="-1"></a><span class="co">#Colo</span></span>
+<span id="cb41-26"><a href="metodos.html#cb41-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Cole</span></span>
+<span id="cb41-27"><a href="metodos.html#cb41-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-28"><a href="metodos.html#cb41-28" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
+<span id="cb41-29"><a href="metodos.html#cb41-29" aria-hidden="true" tabindex="-1"></a><span class="co">#componente2:#</span></span>
+<span id="cb41-30"><a href="metodos.html#cb41-30" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
+<span id="cb41-31"><a href="metodos.html#cb41-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-32"><a href="metodos.html#cb41-32" aria-hidden="true" tabindex="-1"></a><span class="co">#OD</span></span>
+<span id="cb41-33"><a href="metodos.html#cb41-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-34"><a href="metodos.html#cb41-34" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
+<span id="cb41-35"><a href="metodos.html#cb41-35" aria-hidden="true" tabindex="-1"></a><span class="co">#componente3:#</span></span>
+<span id="cb41-36"><a href="metodos.html#cb41-36" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
+<span id="cb41-37"><a href="metodos.html#cb41-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-38"><a href="metodos.html#cb41-38" aria-hidden="true" tabindex="-1"></a><span class="co">#pH</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="metodos.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Segunda forma</span></span>
+<span id="cb42-2"><a href="metodos.html#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="metodos.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#podemos observar que todos las variables  estan asociados mas a la  </span></span>
+<span id="cb42-4"><a href="metodos.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#dimension 1,excepto &quot;pH&quot; y &quot;OD&quot; que no se sabe con exactitud si pertenece</span></span>
+<span id="cb42-5"><a href="metodos.html#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co">#a la dimension 1 o a la dimension2 de manera visual, pero con nuestra matriz de</span></span>
+<span id="cb42-6"><a href="metodos.html#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co">#correlacion ya determinamos la variable &quot;pH&quot; pertenece al componente3 </span></span>
+<span id="cb42-7"><a href="metodos.html#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co">#y la variable &quot;OD&quot; pertenece al componente2</span></span>
+<span id="cb42-8"><a href="metodos.html#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="metodos.html#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-10"><a href="metodos.html#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb42-11"><a href="metodos.html#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(acp, <span class="at">col.var=</span><span class="st">&quot;steelblue&quot;</span>)<span class="sc">+</span><span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="calidad_del_agua_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="metodos.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#biplot</span></span>
-<span id="cb46-2"><a href="metodos.html#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-3"><a href="metodos.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
-<span id="cb46-4"><a href="metodos.html#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(acp, <span class="at">repel =</span> F,</span>
-<span id="cb46-5"><a href="metodos.html#cb46-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.var =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
-<span id="cb46-6"><a href="metodos.html#cb46-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.ind =</span> <span class="st">&quot;black&quot;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="metodos.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#biplot</span></span>
+<span id="cb43-2"><a href="metodos.html#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="metodos.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb43-4"><a href="metodos.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(acp, <span class="at">repel =</span> F,</span>
+<span id="cb43-5"><a href="metodos.html#cb43-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.var =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
+<span id="cb43-6"><a href="metodos.html#cb43-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.ind =</span> <span class="st">&quot;black&quot;</span> )</span></code></pre></div>
 <p><img src="calidad_del_agua_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="metodos.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="do">###indicadores</span></span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="metodos.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafica de Valores propios - ScreePlot</span></span>
-<span id="cb48-2"><a href="metodos.html#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="metodos.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#El primer componente retiene 74% de la inercia total</span></span>
-<span id="cb48-4"><a href="metodos.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co">#El segundo componete retiene 9.8% de la inercia total</span></span>
-<span id="cb48-5"><a href="metodos.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co">#El tercer componente retiene 5.7% de la inercia total</span></span>
-<span id="cb48-6"><a href="metodos.html#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(acp, <span class="at">addlabels=</span><span class="cn">TRUE</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>,</span>
-<span id="cb48-7"><a href="metodos.html#cb48-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">barfill=</span><span class="st">&quot;white&quot;</span>, <span class="at">barcolor =</span><span class="st">&quot;darkblue&quot;</span>,</span>
-<span id="cb48-8"><a href="metodos.html#cb48-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">linecolor =</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">80</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="metodos.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">###indicadores</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="metodos.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafica de Valores propios - ScreePlot</span></span>
+<span id="cb45-2"><a href="metodos.html#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="metodos.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co">#El primer componente retiene 74% de la inercia total</span></span>
+<span id="cb45-4"><a href="metodos.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co">#El segundo componete retiene 9.8% de la inercia total</span></span>
+<span id="cb45-5"><a href="metodos.html#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co">#El tercer componente retiene 5.7% de la inercia total</span></span>
+<span id="cb45-6"><a href="metodos.html#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(acp, <span class="at">addlabels=</span><span class="cn">TRUE</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>,</span>
+<span id="cb45-7"><a href="metodos.html#cb45-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">barfill=</span><span class="st">&quot;white&quot;</span>, <span class="at">barcolor =</span><span class="st">&quot;darkblue&quot;</span>,</span>
+<span id="cb45-8"><a href="metodos.html#cb45-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">linecolor =</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">80</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>() </span></code></pre></div>
 <p><img src="calidad_del_agua_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="metodos.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scores o Puntuaciones de cada individuo</span></span>
-<span id="cb49-2"><a href="metodos.html#cb49-2" aria-hidden="true" tabindex="-1"></a>acp<span class="sc">$</span>li[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="metodos.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scores o Puntuaciones de cada individuo</span></span>
+<span id="cb46-2"><a href="metodos.html#cb46-2" aria-hidden="true" tabindex="-1"></a>acp<span class="sc">$</span>li[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,]</span></code></pre></div>
 <pre><code>##         Axis1      Axis2      Axis3
 ## Ene -1.127415  1.2241429 -0.4215330
 ## Feb -7.321424 -1.5374149 -1.7252348
@@ -600,8 +547,8 @@ Distanicia euclidiana y metodo de enlace Ward.D2</p>
 ## Ago  3.572872 -1.2874593  1.1904835
 ## Set  2.750543 -0.5237799  1.5165983
 ## Oct  2.683794  1.3317449 -0.4582014</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="metodos.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfica de individuos sobre el primer plano de componentes</span></span>
-<span id="cb51-2"><a href="metodos.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">s.label</span>(acp<span class="sc">$</span>li,<span class="at">clabel=</span><span class="fl">0.7</span>,<span class="at">grid=</span><span class="cn">FALSE</span>,<span class="at">boxes=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="metodos.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfica de individuos sobre el primer plano de componentes</span></span>
+<span id="cb48-2"><a href="metodos.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">s.label</span>(acp<span class="sc">$</span>li,<span class="at">clabel=</span><span class="fl">0.7</span>,<span class="at">grid=</span><span class="cn">FALSE</span>,<span class="at">boxes=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="calidad_del_agua_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 
 </div>
